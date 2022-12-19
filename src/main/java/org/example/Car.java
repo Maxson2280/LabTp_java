@@ -1,5 +1,7 @@
 package org.example;
 
+import java.time.ZonedDateTime;
+
 public class Car implements Runnable {
     private static int CARS_COUNT;
 
@@ -29,9 +31,9 @@ public class Car implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println(this.name + " готовится");
+            System.out.println(ZonedDateTime.now().toInstant().toEpochMilli() + " ms " + this.name + " готовится");
             Thread.sleep(500 + (int) (Math.random() * 800));
-            System.out.println(this.name + " готов");
+            System.out.println(ZonedDateTime.now().toInstant().toEpochMilli() + " ms " + this.name + " готов");
             Main.startBarrier.await();
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,7 +44,7 @@ public class Car implements Runnable {
         Main.finishLatch.countDown();
         int finishPlace = Main.finishCount++;
         if (finishPlace == 1) {
-            System.out.println(this.name + " WIN");
+            System.out.println(ZonedDateTime.now().toInstant().toEpochMilli() + " ms " + this.name + " WIN");
         }
     }
 }

@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.ZonedDateTime;
 import java.util.concurrent.Semaphore;
 
 public class Tunnel extends Stage {
@@ -12,14 +13,14 @@ public class Tunnel extends Stage {
     public void go(Car c) {
         try {
             try {
-                System.out.println(c.getName() + " готовится к этапу(ждет): " + description);
+                System.out.println(ZonedDateTime.now().toInstant().toEpochMilli() + " ms " + c.getName() + " готовится к этапу(ждет): " + description);
                 smp.acquire();
-                System.out.println(c.getName() + " начал этап: " + description);
+                System.out.println(ZonedDateTime.now().toInstant().toEpochMilli() + " ms " + c.getName() + " начал этап: " + description);
                 Thread.sleep(length / c.getSpeed() * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
-                System.out.println(c.getName() + " закончил этап: " + description);
+                System.out.println(ZonedDateTime.now().toInstant().toEpochMilli() + " ms " + c.getName() + " закончил этап: " + description);
                 smp.release();
             }
         } catch (Exception e) {
