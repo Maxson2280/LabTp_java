@@ -10,9 +10,9 @@ public class Road extends Stage {
     @Override
     public void go(Car c) {
         try {
-            System.out.println(ZonedDateTime.now().toInstant().toEpochMilli() + " ms " + c.getName() + " начал этап: " + description);
+            System.out.println(ZonedDateTime.now().getNano() + " ns " + c.getName() + " начал этап: " + description);
             Thread.sleep(length / c.getSpeed() * 1000);
-            System.out.println(ZonedDateTime.now().toInstant().toEpochMilli() + " ms " + c.getName() + " закончил этап: " + description);
+            System.out.println(ZonedDateTime.now().getNano() + " ns "  + c.getName() + " закончил этап: " + description);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

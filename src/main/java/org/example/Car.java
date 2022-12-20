@@ -31,9 +31,9 @@ public class Car implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println(ZonedDateTime.now().toInstant().toEpochMilli() + " ms " + this.name + " готовится");
+            System.out.println(ZonedDateTime.now().getNano() + " ns "  + this.name + " готовится");
             Thread.sleep(500 + (int) (Math.random() * 800));
-            System.out.println(ZonedDateTime.now().toInstant().toEpochMilli() + " ms " + this.name + " готов");
+            System.out.println(ZonedDateTime.now().getNano() + " ns "  + this.name + " готов");
             Main.startBarrier.await();
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,7 +44,7 @@ public class Car implements Runnable {
         Main.finishLatch.countDown();
         int finishPlace = Main.finishCount++;
         if (finishPlace == 1) {
-            System.out.println(ZonedDateTime.now().toInstant().toEpochMilli() + " ms " + this.name + " WIN");
+            System.out.println(ZonedDateTime.now().getNano() + " ns "  + this.name + " WIN");
         }
     }
 }

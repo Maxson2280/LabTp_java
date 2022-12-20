@@ -6,13 +6,13 @@ public class Main {
     public static final int CARS_COUNT = 4;
     private static final ExecutorService executorService = Executors.newFixedThreadPool(CARS_COUNT);
     public static CyclicBarrier startBarrier = new CyclicBarrier(CARS_COUNT + 1,
-            ()-> System.out.println(ZonedDateTime.now().toInstant().toEpochMilli() + " ms " + "ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!"));
+            ()-> System.out.println(ZonedDateTime.now().getNano() + " ns " + "ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!"));
     public static CountDownLatch finishLatch = new CountDownLatch(CARS_COUNT);
     public static int finishCount = 0;
 
 
     public static void main(String[] args) {
-        System.out.println(ZonedDateTime.now().toInstant().toEpochMilli() + " ms " + "ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
+        System.out.println(ZonedDateTime.now().getNano() + " ns "  + "ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
         Race race = new Race(new Road(60), new Tunnel(), new Road(40));
         Car[] cars = new Car[CARS_COUNT];
         for (int i = 0; i < cars.length; i++) {
@@ -33,7 +33,7 @@ public class Main {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         } finally {
-            System.out.println(ZonedDateTime.now().toInstant().toEpochMilli() + " ms " + "ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
+            System.out.println(ZonedDateTime.now().getNano() + " ns "  + "ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
             executorService.shutdown();
         }
 
