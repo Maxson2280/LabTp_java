@@ -3,6 +3,7 @@ package org.example;
 import java.time.ZonedDateTime;
 
 public class Car implements Runnable {
+    public static long start = System.currentTimeMillis();
     private static int CARS_COUNT;
 
     static {
@@ -31,9 +32,9 @@ public class Car implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println(ZonedDateTime.now().getNano() + " ns "  + this.name + " готовится");
+            System.out.println(System.currentTimeMillis() - start + " ms "   + this.name + " готовится");
             Thread.sleep(500 + (int) (Math.random() * 800));
-            System.out.println(ZonedDateTime.now().getNano() + " ns "  + this.name + " готов");
+            System.out.println(System.currentTimeMillis() - start + " ms "   + this.name + " готов");
             Main.startBarrier.await();
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,7 +45,7 @@ public class Car implements Runnable {
         Main.finishLatch.countDown();
         int finishPlace = Main.finishCount++;
         if (finishPlace == 1) {
-            System.out.println(ZonedDateTime.now().getNano() + " ns "  + this.name + " WIN");
+            System.out.println(System.currentTimeMillis() - start + " ms "   + this.name + " WIN");
         }
     }
 }
